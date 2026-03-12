@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
-import { Outfit, Geist } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
-import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/theme-provider";
+import { ModeToggle } from "@/components/ui/mode-toggle";
+import Footer from "@/components/ui/footer";
+import Navbar from "@/components/ui/Navbar";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const outfit = Outfit({subsets: ['latin']})
 
@@ -18,11 +20,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("font-sans", geist.variable)}>
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${outfit.className}`}
+        className={`${outfit.className} flex flex-col min-h-screen`}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange  
+        >                
+          
+            <Navbar user={{}} logout={{}}/>     
+            <main className="flex-1 items-center justify-center flex">
+                {children}    
+            </main>
+            <Footer/>
+          
+        </ThemeProvider>
       </body>
     </html>
   );
