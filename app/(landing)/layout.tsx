@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import Footer from "@/components/ui/footer";
@@ -32,7 +32,7 @@ export default function RootLayout({
         >                
           
             <Navbar user={{}} logout={{}}/>     
-            <main className="flex-1 items-center justify-center flex">
+            <main className="flex-1 h-full items-center justify-center flex">
                 {children}    
             </main>
             <Footer/>

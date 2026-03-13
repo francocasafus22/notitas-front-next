@@ -3,14 +3,16 @@
 import Link from "next/link";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./dropdown-menu";
 import { Button } from "./button";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar({user, logout} : {user: any, logout: any}) {
 
-    const location = "/"
-    console.log(location)
-
+    const location = usePathname()    
+    const router = useRouter()
     const isActive = (path: string) => {
-        
+        if (location === path) {
+            return "bg-primary text-primary-foreground"
+        }
     }
 
     return (
@@ -19,8 +21,8 @@ export default function Navbar({user, logout} : {user: any, logout: any}) {
             <div className="flex items-center gap-2 cursor-pointer">
             <img
                 src="/logo-notitas.png"
-                className="w-10 "
-                onClick={() => {}}
+                className="w-10 bg-background rounded-full p-1"
+                onClick={() => router.push("/")}
             />
             </div>
         </div>
