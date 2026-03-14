@@ -23,7 +23,7 @@ export default function Navbar({user, logout} : {user: any, logout: any}) {
             <div className="flex items-center gap-2 cursor-pointer">
                 <Logo/>
             </div>
-            <ModeToggle/>
+            
         </div>
         <ul className="hidden md:flex md:gap-1">
             <Link
@@ -82,7 +82,10 @@ export default function Navbar({user, logout} : {user: any, logout: any}) {
                 >
                     Log out
                 </button>
-                </DropdownMenuItem>
+                </DropdownMenuItem>            
+                <div className="flex justify-center py-2">
+                    <ModeToggle/>
+                </div>
             </DropdownMenuContent>
             </DropdownMenu>
         ) : (
