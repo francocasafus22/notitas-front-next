@@ -1,3 +1,4 @@
+
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const Pagination = ({ currentPage, totalPages, onPageChange } : {currentPage: number, totalPages: number, onPageChange: (page: number) => void}) => {

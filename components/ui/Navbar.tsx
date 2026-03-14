@@ -4,6 +4,8 @@ import Link from "next/link";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./dropdown-menu";
 import { Button } from "./button";
 import { usePathname, useRouter } from "next/navigation";
+import { ModeToggle } from "./mode-toggle";
+import Logo from "./logo";
 
 export default function Navbar({user, logout} : {user: any, logout: any}) {
 
@@ -19,12 +21,9 @@ export default function Navbar({user, logout} : {user: any, logout: any}) {
         <nav className="flex items-center justify-between px-6 py-3">
         <div className="flex items-center gap-6">
             <div className="flex items-center gap-2 cursor-pointer">
-            <img
-                src="/logo-notitas.png"
-                className="w-10 bg-background rounded-full p-1"
-                onClick={() => router.push("/")}
-            />
+                <Logo/>
             </div>
+            <ModeToggle/>
         </div>
         <ul className="hidden md:flex md:gap-1">
             <Link
