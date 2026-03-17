@@ -10,7 +10,7 @@ import ExploreClient from "./explore-client";
 export default async function ExplorePage() {
 
     const data = await getNotes();
-
+    
     return (
         <ExploreClient initalData={data} />
     );
