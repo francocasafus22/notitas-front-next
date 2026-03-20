@@ -7,7 +7,7 @@ export async function apiFetch(endpoint: string, options?: RequestInit){
         },
         credentials: "include"
     })
-
+    
     if(!res.ok) throw new Error("API Error")
 
     return res.json();

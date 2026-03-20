@@ -1,7 +1,10 @@
+import AddCommentForm from "@/components/comments/add-comment-form";
+import CommentCard from "@/components/comments/comment-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getSession, verifySession } from "@/src/auth/dal";
+import { getComments } from "@/src/services/comments.service";
 import { getNote } from "@/src/services/notes.service";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -14,7 +17,8 @@ export default async function Page({ params }: {
     const {postSlug} = await params;
     const post = await getNote(postSlug);
     const session = await getSession()
-    console.log(session)
+    const comments = await getComments(post._id);
+    const isLoadingComments = comments === null ? true : false
 
     return (
         <div className="mx-auto container lg:max-w-3xl xl:max-w-5xl my-10 px-5 lg:px-0 space-y-10">
@@ -58,6 +62,24 @@ export default async function Page({ params }: {
             <p className="text-5xl font-bold border-t-2 pt-5 border-border ">
                 Comentarios
             </p>
+
+            <div className="space-y-2">
+                <>
+                {session?.isAuth && <AddCommentForm postId={post._id} slug={postSlug} user={session?.user} />}
+                {isLoadingComments ? (
+                    <p>Cargando...</p>
+                ) : (
+                    comments.map((comment : any) => (
+                    <CommentCard comment={comment} key={comment._id} slug={postSlug} />
+                    ))
+                )}
+                {comments?.length == 0 && (
+                    <p className="font-semibold text-md mt-5">
+                    Be the first to comment
+                    </p>
+                )}
+                </>
+            </div>
 
 
             <Link className="flex items-center justify-center mt-10" href={"/explore"}>

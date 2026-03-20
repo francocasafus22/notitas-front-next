@@ -92,13 +92,8 @@ export default function NoteCard({ post, canDelete, canLike } : {post: any, canD
                 <span className="font-medium">@{post.authorName}</span>
                 <span>•</span>
                 <span>{new Date(post.createdAt).toLocaleDateString()}</span>
-            </div>
+            </div>                
 
-            
-           {/*canLike &&  <Button className={`hover:bg-destructive transition-all duration-300 cursor-pointer ${post.likedByUser && "bg-destructive"}`} onClick={(e) => {
-                    e.stopPropagation(); {} ? mutateLike(post._id) : navigate("/login")
-                    }}><Heart/>{post.likesCount}</Button>*/}
-        
             </div>
         </div>
         </div>

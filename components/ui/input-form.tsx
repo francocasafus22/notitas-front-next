@@ -9,7 +9,7 @@ export default function InputForm({
     register,
     error,
     className,
-} : {label: string, name: string, type?: string, required?: boolean, placeholder?: string, register: any, error?: string, className?: string}) {
+} : {label?: string, name: string, type?: string, required?: boolean, placeholder?: string, register: any, error?: string, className?: string}) {
     return (
         <label className="flex flex-col gap-1 flex-1">
         <span className="text-sm font-medium">{label}</span>

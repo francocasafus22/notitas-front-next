@@ -5,7 +5,7 @@
 import Link from "next/link";
 import InputForm from "../ui/input-form";
 import { useActionState, useEffect } from "react";
-import { authenticateAction } from "@/auth/authenticate-user-action";
+import { authenticateAction } from "@/actions/auth/authenticate-user-action";
 import { login } from "@/src/services/auth.service";
 import { useRouter } from "next/navigation";
 
