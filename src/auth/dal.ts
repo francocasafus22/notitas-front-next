@@ -11,11 +11,30 @@ export const verifySession = cache(async () => {
     const req = await fetch(url, {
         method: "GET",
         headers: {            
-            "Authorization": `Bearer ${token}`
-        }
+            Cookie: `NOTITAS_TOKEN=${token}`,
+        },
     });
 
-    return req.json().then((res) => {
-        return res
-    })
+    const session = await req.json();
+    return session
 })
+
+export const getSession = cache(async () => {
+    const token = await getToken();
+    if (!token) return null;
+    
+    const url = `${process.env.API_URL}/auth/me`;
+    const req = await fetch(url, {
+        method: "GET",
+        headers: {
+        Cookie: `NOTITAS_TOKEN=${token}`,
+        },
+        credentials: "include",
+    });
+
+    const session = await req.json();
+    return {
+        user: session,
+        isAuth: true,
+    };
+});

@@ -6,8 +6,9 @@ import { Button } from "./button";
 import { usePathname, useRouter } from "next/navigation";
 import { ModeToggle } from "./mode-toggle";
 import Logo from "./logo";
+import { logout } from "@/src/services/auth.service";
 
-export default function Navbar({user, logout} : {user: any, logout: any}) {
+export default function Navbar({user} : {user: any}) {
 
     const location = usePathname()    
     const router = useRouter()
@@ -46,7 +47,7 @@ export default function Navbar({user, logout} : {user: any, logout: any}) {
                 <img
                 src={
                     user.image ||
-                    "https://i.pinimg.com/736x/40/98/2a/40982a8167f0a53dedce3731178f2ef5.jpg"
+                    "logo-placeholder-white.jpg"
                 }
                 className="w-12 rounded-full cursor-pointer hover:shadow-2xl transition-all duration-300"
                 ></img>
@@ -77,6 +78,7 @@ export default function Navbar({user, logout} : {user: any, logout: any}) {
                 <button
                     onClick={async () => {
                     await logout();
+                    router.refresh()
                     }}
                     className="cursor-pointer w-full text-start"
                 >
@@ -90,7 +92,7 @@ export default function Navbar({user, logout} : {user: any, logout: any}) {
             </DropdownMenu>
         ) : (
             <Button
-            onClick={() => {}}
+            onClick={() => router.push("/auth/login")}
             className={"hover:shadow-xl cursor-pointer"}
             >
             Log in

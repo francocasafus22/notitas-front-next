@@ -14,14 +14,17 @@ import {
 import InputForm from "../ui/input-form";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
+import { useRouter } from "next/navigation";
 
 
 export default function NoteCard({ post, canDelete, canLike } : {post: any, canDelete: boolean, canLike: boolean}) {
     
+    const router = useRouter()  
+
     return (
         <div
         className={`p-8 rounded-xl border border-border bg-secondary text-secondary-foreground shadow-md relative transition-shadow duration-200 ${false ? "cursor-default" : "cursor-pointer hover:shadow-xl"}`}
-        onClick={()=>{}}
+        onClick={()=>router.push(`/${post.authorName}/post/${post.slug}`)}
         key={post.slug}
         >
         <div className="flex flex-col h-full justify-between gap-2">

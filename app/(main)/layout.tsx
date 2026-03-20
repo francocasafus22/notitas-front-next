@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import Footer from "@/components/ui/footer";
 import Navbar from "@/components/ui/Navbar";
+import { getSession } from "@/src/auth/dal";
 
 
 const outfit = Outfit({subsets: ['latin']})
@@ -14,11 +15,14 @@ export const metadata: Metadata = {
   description: "Write your ideas and share with the world",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const session = await getSession()
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -31,7 +35,7 @@ export default function RootLayout({
           disableTransitionOnChange  
         >                
           
-            <Navbar user={{}} logout={{}}/>     
+            <Navbar user={session?.isAuth && session?.user}/>     
             <main className="flex-1 ">
                 {children}    
             </main>

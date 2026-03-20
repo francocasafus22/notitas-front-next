@@ -2,7 +2,9 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-export default function Home() {
+
+export default async function Home() {
+
   return (
     <div className="flex flex-col h-full  items-center justify-center px-5">
       <h1 className="text-7xl md:text-8xl font-extrabold mb-6 text-center">Notitas</h1>
