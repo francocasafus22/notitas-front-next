@@ -1,4 +1,5 @@
 import ErrorMessage from "../error-message";
+import { Input } from "./input";
 
 export default function InputForm({
     label,
@@ -6,20 +7,20 @@ export default function InputForm({
     type,
     required,
     placeholder,
-    register,
+    defaultValue,    
     error,
     className,
-} : {label?: string, name: string, type?: string, required?: boolean, placeholder?: string, register: any, error?: string, className?: string}) {
+} : {label?: string, name: string, type?: string, required?: boolean, placeholder?: string, error?: string, className?: string, defaultValue?: string}) {
     return (
         <label className="flex flex-col gap-1 flex-1">
         <span className="text-sm font-medium">{label}</span>
-        <input
+        <Input
             name={name}
             type={type || "text"}
             required={required}
-            placeholder={placeholder}
-            {...register(name, { required })}
+            placeholder={placeholder}            
             className={`text-md border border-border rounded-md py-1 px-3 focus:shadow-xl placeholder:text-placeholder focus:outline-none focus:ring-2 focus:ring-ring shadow-xs  ${className}`}
+            defaultValue={defaultValue}
         />
         {error && <ErrorMessage message={error} />}
         </label>

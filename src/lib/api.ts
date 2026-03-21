@@ -1,3 +1,5 @@
+import { notFound, unauthorized } from "next/navigation"
+
 export async function apiFetch(endpoint: string, options?: RequestInit){
     const res = await fetch(`${process.env.API_URL}${endpoint}`, {
         ...options,
@@ -7,8 +9,19 @@ export async function apiFetch(endpoint: string, options?: RequestInit){
         },
         credentials: "include"
     })
-    
-    if(!res.ok) throw new Error("API Error")
+        
+    if(!res.ok){
+            switch (res.status) {
+            case 401:
+                unauthorized()            
+            case 404: 
+                notFound()
+            default:
+                const error = await res.json().catch(()=>null)
+                throw new Error(error?.message || "Error")
+            
+            }    
+        }
 
     return res.json();
 }
