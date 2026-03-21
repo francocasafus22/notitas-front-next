@@ -17,9 +17,9 @@ export default async function Page({ params }: {
     const {postSlug} = await params;
     const post = await getNote(postSlug);
     const session = await getSession()
-    const comments = await getComments(post._id);
+    const comments = await getComments(post._id);        
     const isLoadingComments = comments === null ? true : false
-
+    
     return (
         <div className="mx-auto container lg:max-w-3xl xl:max-w-5xl my-10 px-5 lg:px-0 space-y-10">
             
@@ -70,7 +70,7 @@ export default async function Page({ params }: {
                     <p>Cargando...</p>
                 ) : (
                     comments.map((comment : any) => (
-                    <CommentCard comment={comment} key={comment._id} slug={postSlug} />
+                    <CommentCard comment={comment} key={comment._id} postId={post._id} />
                     ))
                 )}
                 {comments?.length == 0 && (
