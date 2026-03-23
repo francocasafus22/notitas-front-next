@@ -3,14 +3,13 @@ import remarkGfm from "remark-gfm";
 import remarkBreaks from "remark-breaks";
 import rehypeSlug from "rehype-slug";
 import rehypePrism from "rehype-prism-plus";
-import rehypeHighlight from "rehype-highlight";
 import "prism-themes/themes/prism-one-dark.css";
 
 
 
-export default function MarkdownView({ content }) {
+export default function MarkdownView({ content } : { content: string }) {
     return (
-        <article className="prose prose-md prose-code: text-xl prose-stone max-w-full
+        <article className="prose prose-md prose-code:text-lg prose-stone max-w-full
                     prose-headings:font-bold prose-headings:text-primary                
                     prose-h1:text-4xl
                     prose-h2:text-3xl
@@ -38,7 +37,7 @@ export default function MarkdownView({ content }) {
                 remarkPlugins={[remarkGfm, remarkBreaks]}
                 rehypePlugins={[                  
                     rehypeSlug,
-                    rehypeHighlight,
+                    
                     rehypePrism
                 ]}
             >

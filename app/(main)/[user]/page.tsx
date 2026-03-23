@@ -12,8 +12,6 @@ export default async function ProfilePage({ params }: {
   
   const userData = await getProfile(user)
   const postData = await getNotesByUser(user)
-  console.log(userData)
-  console.log(postData)
 
   const postIsLoading = false
 
@@ -24,7 +22,7 @@ export default async function ProfilePage({ params }: {
             <div className="relative aspect-3/1  mb-25">
               <div
                 className="absolute left-1/2 -translate-x-1/2
-                    -bottom-16"
+                    -bottom-16 flex flex-col items-center"
               >
                 {userData.isOwner ? (
                   <Image
@@ -38,9 +36,9 @@ export default async function ProfilePage({ params }: {
                   <Image
                     alt={`User profile image for ${userData.user.username}`}
                     src={userData.user.image || "/logo-placeholder.jpg"}
-                    className="w-24 h-24 rounded-full border border-border "
-                    width={50}
-                    height={50}
+                    className="w-24 h-24 rounded-full border border-border"
+                    width={500}
+                    height={500}
                   />
                 )}
                 <p className="text-center font-bold">

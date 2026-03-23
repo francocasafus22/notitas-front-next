@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { ModeToggle } from "./mode-toggle";
 import Logo from "./logo";
 import { logout } from "@/src/services/auth.service";
+import Image from "next/image";
 
 export default function Navbar({user} : {user: any}) {
 
@@ -44,13 +45,16 @@ export default function Navbar({user} : {user: any}) {
         {user ? (
             <DropdownMenu>
             <DropdownMenuTrigger className="outline-none">
-                <img
+                <Image
+                alt={`${user?.username || "Notitas User"} profile image`}
+                width={500}
+                height={500}                                
                 src={
                     user.image ||
-                    "logo-placeholder-white.jpg"
+                    "/logo-placeholder-white.jpg"
                 }
                 className="w-12 rounded-full cursor-pointer hover:shadow-2xl transition-all duration-300"
-                ></img>
+                ></Image>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
                 <DropdownMenuItem>

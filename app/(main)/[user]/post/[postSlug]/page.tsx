@@ -1,5 +1,6 @@
 import AddCommentForm from "@/components/comments/add-comment-form";
 import CommentCard from "@/components/comments/comment-card";
+import MarkdownView from "@/components/markdown-view";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -20,6 +21,8 @@ export default async function Page({ params }: {
     const comments = await getComments(post._id);        
     const isLoadingComments = comments === null ? true : false
     
+    
+
     return (
         <div className="mx-auto container lg:max-w-3xl xl:max-w-5xl my-10 px-5 lg:px-0 space-y-10">
             
@@ -33,7 +36,7 @@ export default async function Page({ params }: {
                         "flex gap-1 text-sm hover:shadow-xl transition-all duration-200 cursor-pointer"
                     }                    
                     >
-                    <Avatar className={"h-6 w-6"}>
+                    <Avatar className={"h-4.5 w-4.5"}>
                         <AvatarImage
                         src={post.authorAvatar || "/logo-placeholder.jpg"}
                         alt={post.authorName}
@@ -57,7 +60,7 @@ export default async function Page({ params }: {
                 </div>{" "}
             </div>
 
-            {/*<MarkdownView content={post.body}></MarkdownView>*/}
+            <MarkdownView content={post.body}></MarkdownView>            
 
             <p className="text-5xl font-bold border-t-2 pt-5 border-border ">
                 Comentarios
