@@ -4,25 +4,19 @@
 
 import Link from "next/link";
 import InputForm from "../ui/input-form";
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { authenticateAction } from "@/actions/auth/authenticate-user-action";
 import { login } from "@/src/services/auth.service";
 import { useRouter } from "next/navigation";
+import ErrorMessage from "../error-message";
 
 
 
 export default function LoginForm() {
 
 
-    const [state, dispatch, isPending] = useActionState(authenticateAction, {
-    errors: [],
-    success: "",
-    });
-
-    useEffect(()=>{
-        console.log(state?.errors)
-    }, [state])
-
+    const [error, setError] = useState<string>("");
+    
 
     const router = useRouter()
 
@@ -36,13 +30,14 @@ export default function LoginForm() {
                     
                     const username = formData.get("username") as string;
                     const password = formData.get("password") as string;
-
+            
                     try{
                         await login(username,password);
                         router.push("/")
-                    } catch(error){
-                        console.error(error)
-                    }
+                    } catch(error:string|any){                        
+                        setError(error.message)
+                    }                                                
+                    
                     
                 }}
                 >
@@ -53,8 +48,7 @@ export default function LoginForm() {
                     name={"username"}
                     type={"text"}
                     required
-                    placeholder={"Enter your username"}
-                    register={()=>{}}
+                    placeholder={"Enter your username"}                    
                 />
             
                 <InputForm
@@ -62,9 +56,10 @@ export default function LoginForm() {
                     name={"password"}
                     type={"password"}
                     required
-                    placeholder={"Enter password"}
-                    register={()=>{}}
+                    placeholder={"Enter password"}                    
                 ></InputForm>
+
+                <ErrorMessage message={error} />
 
                 <button
                     className="

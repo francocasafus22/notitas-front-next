@@ -11,17 +11,9 @@ export async function apiClientFetch(endpoint: string, options?: RequestInit) {
         },
     });    
 
-    if(!res.ok){
-        switch (res.status) {
-        case 401:
-            unauthorized()            
-        case 404: 
-            notFound()
-        default:
-            const error = await res.json().catch(()=>null)
-            throw new Error(error?.message || "Error")
-        
-        }    
+    if(!res.ok){        
+        const error = await res.json().catch(()=>null)
+        throw new Error(error?.message || "Error")            
     }
 
     return res.json()

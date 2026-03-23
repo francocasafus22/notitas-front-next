@@ -36,6 +36,7 @@ export async function authenticateAction(prevState: ActionStateType, formData: F
 
     const req = await fetch(url, {
         method: "POST",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             username: login.data.username,
@@ -43,10 +44,14 @@ export async function authenticateAction(prevState: ActionStateType, formData: F
         })
     })
 
+    const json = await req.json()
+
+    console.log(json)
+
     if(!req.ok){
-        const error = ErrorSchema.parse(await req.json());        
+        const error = json.message;        
         return {
-            errors: [error.error],
+            errors: [error],
             success: ""
         }
     }
