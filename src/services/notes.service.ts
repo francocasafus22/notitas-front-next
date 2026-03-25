@@ -4,7 +4,10 @@ import { apiClientFetch } from "../lib/api.client";
 import { notFound } from "next/navigation";
 import getToken from "../auth/token";
 
-export const getNotes = () => apiFetch("/post")
+export  const  getNotes = async() => {
+    const token = await getToken()
+    return apiFetch("/post", { headers: { Cookie: `NOTITAS_TOKEN=${token}`} ,next: { tags: ["notes"] } })
+}
 export const getNote = async (slug : string) => apiClientFetch(`/post/${slug}`)
 export const getNotesByUser = async (user : string) => {
     const token = await getToken()

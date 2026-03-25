@@ -1,4 +1,4 @@
-"use client"
+
 
 import { Heart, X } from "lucide-react";
 import {
@@ -14,17 +14,17 @@ import {
 import InputForm from "../ui/input-form";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import LikeNoteForm from "./like-note-form";
+
 
 
 export default function NoteCard({ post, canDelete, canLike } : {post: any, canDelete: boolean, canLike: boolean}) {
     
-    const router = useRouter()  
-
     return (
-        <div
-        className={`p-8 rounded-xl border border-border bg-secondary text-secondary-foreground shadow-md relative transition-shadow duration-200 ${false ? "cursor-default" : "cursor-pointer hover:shadow-xl"}`}
-        onClick={()=>router.push(`/${post.authorName}/post/${post.slug}`)}
+        <Link
+        href={`/${post.authorName}/post/${post.slug}`}
+        className={`p-8 rounded-xl border border-border bg-secondary text-secondary-foreground shadow-md relative transition-shadow duration-200 ${false ? "cursor-default" : "cursor-pointer hover:shadow-xl"}`}        
         key={post.slug}
         >
         <div className="flex flex-col h-full justify-between gap-2">
@@ -53,8 +53,7 @@ export default function NoteCard({ post, canDelete, canLike } : {post: any, canD
                         label={`Password`}
                         name={"password"}
                         required
-                        placeholder={"Enter your password"}
-                        register={()=>{}}
+                        placeholder={"Enter your password"}                        
                         error={""}
                     />
                     </div>
@@ -94,8 +93,15 @@ export default function NoteCard({ post, canDelete, canLike } : {post: any, canD
                 <span>{new Date(post.createdAt).toLocaleDateString()}</span>
             </div>                
 
+                {
+                    canLike &&  
+    
+                            <LikeNoteForm post={post}/>
+    
+                }
+
             </div>
         </div>
-        </div>
+        </Link>
     );
 }

@@ -6,11 +6,10 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useState } from "react"
 
-export default function ExploreClient({initalData} : any) {
-
-    const [data, setData] = useState(initalData)
+export default function ExploreClient({data} : any) {
+    
     const [search, setSearch] = useState("");    
-    console.log(data)
+    
     return (
         <div className="max-w-5xl mx-auto px-5 xl:px-0 my-5 space-y-10 ">
             <h1 className="text-5xl font-bold">Explore</h1>

@@ -10,9 +10,9 @@ import { getSession, verifySession } from "@/src/auth/dal";
 
 export default async function ExplorePage() {
 
-    const data = await getNotes();        
+    const data = await getNotes();     
 
     return (
-        <ExploreClient initalData={data} />
+        <ExploreClient data = {data} />
     );
 }
