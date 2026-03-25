@@ -50,6 +50,7 @@ export default function CommentCard({ comment, postId } : {comment: any, postId:
                     <form action={dispatch}>
                         <Button
                         variant={"destructive"}
+                        className="w-full"
                         onClick={()=>{}}
                         >
                             {isPending ? (
